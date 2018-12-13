@@ -1,6 +1,6 @@
 var TRANSACTION_SPEED = 1.5;
 var TRANSACTION_RADIUS = 5;
-var TRANSACTION_COLOR = 0xFFFF00;
+var TRANSACTION_COLOR = 0xFEFE00;
 
 class Transaction {
     constructor(start, target) {

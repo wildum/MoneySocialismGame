@@ -1,3 +1,8 @@
+// modal
+var span = document.getElementsByClassName("close")[0];
+var modal = document.getElementById('myModal');
+var wintext = document.getElementById('win-text');
+
 var moveCounter = 0;
 var currentLevel = 1;
 
@@ -6,7 +11,7 @@ var app = new PIXI.Application({
     height: 548,
     transparent: false,
     resolution: 2,
-    backgroundColor: 0xFFFFFF
+    backgroundColor: 0xfefefe
 });
 
 var gameLayer = new PIXI.Container();
@@ -53,6 +58,25 @@ function updateTransactions() {
         }
         return true;
     })
+    if (transactions.length == 0) {
+        if (checkWin()) {
+            modal.style.display = "block";
+            wintext.innerHTML = 'You won using ' + moveCounter + ' moves.';
+            graph = new World();
+            nodes = graph.nodes;
+            moveCounter = 0;
+            showStats();
+        }
+    }
+}
+
+function checkWin() {
+    for (var n of nodes) {
+        if (n.value < 0) {
+            return false;
+        }
+    }
+    return true;
 }
 
 document.getElementById("canvasZone").appendChild(app.view);

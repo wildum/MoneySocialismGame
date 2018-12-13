@@ -57,6 +57,10 @@
     animation-name: animatetop;
     animation-duration: 0.4s
   }
+
+  #popup-body {
+      text-align: center;
+  }
   
   /* Add Animation */
   @keyframes animatetop {

@@ -1,4 +1,6 @@
-var TRANSACTION_SPEED = 1;
+var TRANSACTION_SPEED = 1.5;
+var TRANSACTION_RADIUS = 5;
+var TRANSACTION_COLOR = 0xFFFF00;
 
 class Transaction {
     constructor(start, target) {
@@ -45,8 +47,10 @@ class Transaction {
 }
 
 function getTransactionGraphics() {
-    var label = new PIXI.Text("1", { fontFamily: 'Arial', fontSize: 12, fill: 0xFF0000, align: 'center' });
-    label.anchor.x = label.anchor.y = 1;
-    transactionsLayer.addChild(label);
-    return label;
+    var coin = new PIXI.Sprite(discTexture);
+    coin.scale.set((TRANSACTION_RADIUS*2)/coin.width);
+    coin.tint = TRANSACTION_COLOR;
+    coin.anchor.set(0.5);
+    transactionsLayer.addChild(coin);
+    return coin;
 }

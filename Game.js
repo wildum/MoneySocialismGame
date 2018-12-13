@@ -1,3 +1,6 @@
+var moveCounter = 0;
+var currentLevel = 1;
+
 var app = new PIXI.Application({
     width: 974,
     height: 548,
@@ -7,10 +10,10 @@ var app = new PIXI.Application({
 });
 
 var gameLayer = new PIXI.Container();
-var hudLayer = new PIXI.Container();
+var infoLayer = new PIXI.Container();
 
 app.stage.addChild(gameLayer);
-app.stage.addChild(hudLayer);
+app.stage.addChild(infoLayer);
 
 var linkLayer = new PIXI.Container();
 var nodeLayer = new PIXI.Container();

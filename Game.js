@@ -49,6 +49,8 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+popup("Rules : You win if no one is in debt anymore (no node has a negative value). When you click on a node, it will send 1 unit of money to each of its neighbors.")
+
 function updateTransactions() {
     transactions = transactions.filter(function(t) {
         t.move();
@@ -60,8 +62,7 @@ function updateTransactions() {
     })
     if (transactions.length == 0) {
         if (checkWin()) {
-            modal.style.display = "block";
-            wintext.innerHTML = 'You won using ' + moveCounter + ' moves.';
+            popup('You won using ' + moveCounter + ' moves.')
             graph = new World();
             nodes = graph.nodes;
             moveCounter = 0;
@@ -77,6 +78,11 @@ function checkWin() {
         }
     }
     return true;
+}
+
+function popup(text) {
+    modal.style.display = "block";
+    wintext.innerHTML = text;
 }
 
 document.getElementById("canvasZone").appendChild(app.view);

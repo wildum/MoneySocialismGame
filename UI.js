@@ -15,9 +15,10 @@ app.stage.mousedown = function (e) {
     }
     if (node) {
         node.splitMoneyWithNeighbors();
+        moveCounter++;
+        showStats();
     }
-    moveCounter++;
-    showStats();
+
 };
 
 app.stage.mousemove = function (e) {

@@ -1,7 +1,8 @@
 // modal
 var span = document.getElementsByClassName("close")[0];
 var modal = document.getElementById('myModal');
-var wintext = document.getElementById('win-text');
+var popupheader = document.getElementById('popup-header');
+var popupbody = document.getElementById('popup-body');
 
 var moveCounter = 0;
 var currentLevel = 1;
@@ -49,7 +50,7 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-popup("Rules : You win if no one is in debt anymore (no node has a negative value). When you click on a node, it will send 1 unit of money to each of its neighbors.")
+popup("Rules", "You win if no one is in debt anymore (no node has a negative value). When you click on a node, it will send 1 unit of money to each of its neighbors.")
 
 function updateTransactions() {
     transactions = transactions.filter(function(t) {
@@ -62,7 +63,7 @@ function updateTransactions() {
     })
     if (transactions.length == 0) {
         if (checkWin()) {
-            popup('You won using ' + moveCounter + ' moves.')
+            popup("Victory", "You won using " + moveCounter + " moves.");
             graph = new World();
             nodes = graph.nodes;
             moveCounter = 0;
@@ -80,9 +81,10 @@ function checkWin() {
     return true;
 }
 
-function popup(text) {
+function popup(headertext, bodytext) {
     modal.style.display = "block";
-    wintext.innerHTML = text;
+    popupbody.innerHTML = bodytext;
+    popupheader.innerHTML = headertext;
 }
 
 document.getElementById("canvasZone").appendChild(app.view);

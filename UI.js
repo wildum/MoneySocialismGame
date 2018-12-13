@@ -23,14 +23,21 @@ app.stage.mousedown = function (e) {
 
 app.stage.mousemove = function (e) {
     var p = e.data.getLocalPosition(this);
+    var onNode = false;
     for (var n of graph.nodes) {
         if (Vector.squareDist(n, p) <= NODE_RADIUS * NODE_RADIUS) {
             n.graphics.scale.x = 1.25;
             n.graphics.scale.y = 1.25;
+            onNode = true;
         } else {
             n.graphics.scale.x = 1;
             n.graphics.scale.y = 1;
         }
+    }
+    if(onNode) {
+        document.body.style.cursor = "pointer";
+    } else {
+        document.body.style.cursor = "default";
     }
 
 };

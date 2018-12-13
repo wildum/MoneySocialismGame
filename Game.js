@@ -5,7 +5,7 @@ var popupheader = document.getElementById('popup-header');
 var popupbody = document.getElementById('popup-body');
 
 var moveCounter = 0;
-var currentLevel = 1;
+var STARTING_LEVEL = 1;
 
 var app = new PIXI.Application({
     width: 974,
@@ -39,7 +39,7 @@ function initTextures() {
 }
 initTextures();
 
-var graph = new World();
+var graph = new World(STARTING_LEVEL);
 var nodes = graph.nodes;
 var transactions = []
 
@@ -64,10 +64,7 @@ function updateTransactions() {
     if (transactions.length == 0) {
         if (checkWin()) {
             popup("Victory", "You won using " + moveCounter + " moves.");
-            graph = new World();
-            nodes = graph.nodes;
-            moveCounter = 0;
-            showStats();
+            reset(graph.currentLevel+1);
         }
     }
 }
@@ -85,6 +82,26 @@ function popup(headertext, bodytext) {
     modal.style.display = "block";
     popupbody.innerHTML = bodytext;
     popupheader.innerHTML = headertext;
+}
+
+function reset(nextlevel) {
+
+    linkLayer = new PIXI.Container();
+    nodeLayer = new PIXI.Container();
+    transactionsLayer = new PIXI.Container();
+    
+    gameLayer.children.forEach(c=>c.destroy(true));
+    initTextures();
+    gameLayer.removeChildren();
+    gameLayer.addChild(linkLayer);
+    gameLayer.addChild(transactionsLayer);
+    gameLayer.addChild(nodeLayer);
+
+    graph = new World(nextlevel);
+    nodes = graph.nodes;
+    moveCounter = 0;
+    showStats();
+
 }
 
 document.getElementById("canvasZone").appendChild(app.view);

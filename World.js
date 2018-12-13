@@ -94,29 +94,38 @@ class Link {
 }
 
 class World {
-    constructor() {
+    constructor(level) {
         this.nodes = [];
         this.links = [];
+        this.currentLevel = level;
         var nodes = this.nodes;
+        var mapNodes;
+        var mapLinks;
 
-        //add nodes
-        nodes.push(new Node(150, 224, 10));
-        nodes.push(new Node(500, 224, -5));
-        nodes.push(new Node(250, 400, 3));
-        nodes.push(new Node(700, 50, 1));
-        nodes.push(new Node(700, 354, -1));
-        nodes.push(new Node(200, 35, 2));
-        nodes.push(new Node(900, 224, -2));
+        
 
-        //link nodes
-        this.linkNode(nodes[0], nodes[1]);
-        this.linkNode(nodes[0], nodes[2]);
-        this.linkNode(nodes[1], nodes[6]);
-        this.linkNode(nodes[2], nodes[4]);
-        this.linkNode(nodes[3], nodes[5]);
-        this.linkNode(nodes[3], nodes[6]);
-        this.linkNode(nodes[1], nodes[5]);
-        this.linkNode(nodes[1], nodes[4]);
+        if (this.currentLevel > 3) {
+            this.currentLevel = 1;
+        }
+
+        if (this.currentLevel == 1) {
+            mapNodes = map1.nodes;
+            mapLinks = map1.links;
+        } else if (this.currentLevel == 2) {
+            mapNodes = map2.nodes;
+            mapLinks = map2.links;
+        } else if (this.currentLevel == 3) {
+            mapNodes = map3.nodes;
+            mapLinks = map3.links;
+        }
+
+        for (var n of mapNodes) {
+            nodes.push(new Node(n.x, n.y, n.value));
+        }
+
+        for (var l of mapLinks) {
+            this.linkNode(nodes[l.a], nodes[l.b]);
+        }
 
     }
 

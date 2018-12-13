@@ -47,7 +47,7 @@ function showStats() {
     var countMoveLabel = new PIXI.Text('Move counter: ' + moveCounter, { fontFamily: 'Arial', fontSize: 18, fill: 0, align: 'center' });
     countMoveLabel.x = 20;
     countMoveLabel.y = 20;
-    var levelLabel = new PIXI.Text('Level: ' + currentLevel, { fontFamily: 'Arial', fontSize: 18, fill: 0, align: 'center' });
+    var levelLabel = new PIXI.Text('Level: ' + graph.currentLevel, { fontFamily: 'Arial', fontSize: 18, fill: 0, align: 'center' });
     levelLabel.x = 20;
     levelLabel.y = 40;
     

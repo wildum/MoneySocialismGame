@@ -14,8 +14,10 @@ app.stage.addChild(hudLayer);
 
 var linkLayer = new PIXI.Container();
 var nodeLayer = new PIXI.Container();
+var transactionsLayer = new PIXI.Container();
 
 gameLayer.addChild(linkLayer);
+gameLayer.addChild(transactionsLayer);
 gameLayer.addChild(nodeLayer);
 
 var discTexture;
@@ -30,10 +32,24 @@ initTextures();
 
 var graph = new World();
 var nodes = graph.nodes;
+var transactions = []
+
+setInterval(() => { updateTransactions(); }, 0);
 
 function animate() {    
     app.render();
     requestAnimationFrame(animate);
+}
+
+function updateTransactions() {
+    transactions = transactions.filter(function(t) {
+        t.move();
+        if (t.isAtTarget()) {
+            t.apply();
+            return false;
+        }
+        return true;
+    })
 }
 
 document.getElementById("canvasZone").appendChild(app.view);

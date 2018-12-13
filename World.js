@@ -19,8 +19,7 @@ class Node {
         this.value -= this.neighbors.length;
         this.graphicText.text = this.value.toString();
         for (var n of this.neighbors) {
-            n.value += 1;
-            n.graphicText.text = n.value.toString();
+            transactions.push(new Transaction(this, n));
         }
     }
 
